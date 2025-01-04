@@ -20,3 +20,25 @@ class ProductSerializer(serializers.ModelSerializer):
             )
         
         return value 
+    
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = (
+            'product',
+            'quantity',
+        )
+
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Order
+        fields = (
+            'order_id',
+            'user',
+            'created_at',
+            'status',
+            'items',
+        )
