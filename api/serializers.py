@@ -61,6 +61,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class ProductInfoSerializer(serializers.Serializer):
-    products = Product(many=True)
+    products = ProductSerializer(many=True)
     count = serializers.IntegerField()
     max_price = serializers.FloatField()
