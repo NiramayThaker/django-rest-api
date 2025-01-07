@@ -35,27 +35,30 @@ class ProductListAPIView(generics.ListAPIView):
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    lookup_url_kwarg = 'product_id'
+    # lookup_url_kwarg = 'product_id'
 
 
+class OrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.prefetch_related('items__product')
+    serializer_class = OrderSerializer
 
 
-@api_view(['GET'])
-def order_list(request):
-    # Featch all the data which is related in one query rather than feaching it for every single item
+# @api_view(['GET'])
+# def order_list(request):
+#     # Featch all the data which is related in one query rather than feaching it for every single item
 
-    # orders = Order.objects.prefetch_related(
-    #     'items', 'items__product'
-    # ).all()
+#     # orders = Order.objects.prefetch_related(
+#     #     'items', 'items__product'
+#     # ).all()
 
-    # Both are same as when we featch product from items it automatically featches items 
+#     # Both are same as when we featch product from items it automatically featches items 
 
-    # orders = Order.objects.prefetch_related('items__product').all()
-    orders = Order.objects.prefetch_related('items__product')
+#     # orders = Order.objects.prefetch_related('items__product').all()
+#     orders = Order.objects.prefetch_related('items__product')
 
-    serializer = OrderSerializer(orders, many=True)
+#     serializer = OrderSerializer(orders, many=True)
 
-    return Response(serializer.data)
+#     return Response(serializer.data)
 
 
 @api_view(['GET'])
