@@ -6,14 +6,17 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id',
+            # 'id',
             'name', 
-            # 'description',
+            'description',
             'price',
             'stock',
         )
 
     def validate_price(self, value):
+        '''Automatically gets trigged when .save() or .is_valid() function 
+        is called (validate_<field> validate is special keyword) '''
+
         if value <= 0:
             raise serializers.ValidationError(
             "Price must be greater than 0."
