@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
 # @api_view(['GET'])
 # def product_list(request):
@@ -25,39 +26,6 @@ from rest_framework.permissions import IsAuthenticated
 #     return Response(serializer.data)
 
 
-class ProductListAPIView(generics.ListAPIView):
-    # queryset = Product.objects.filter(stock__gt=0)
-    # queryset = Product.objects.exclude(stock__gt=0)
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-
-class ProductDetailAPIView(generics.RetrieveAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    # lookup_url_kwarg = 'product_id'
-
-
-class OrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items__product')
-    serializer_class = OrderSerializer
-
-
-class UserOrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items__product')
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        # Dynamic filtering the query
-
-        return super().get_queryset().filter(user=self.request.user)
-
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     qs = super.get_queryset()
-    #     return qs.filter(user=user)
-
 
 # @api_view(['GET'])
 # def order_list(request):
@@ -75,6 +43,42 @@ class UserOrderListAPIView(generics.ListAPIView):
 #     serializer = OrderSerializer(orders, many=True)
 
 #     return Response(serializer.data)
+
+
+######################################
+# Class Based views
+######################################
+class ProductListAPIView(generics.ListAPIView):
+    # queryset = Product.objects.filter(stock__gt=0)
+    # queryset = Product.objects.exclude(stock__gt=0)
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_url_kwarg = 'product_id'
+
+
+class OrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.prefetch_related('items__product')
+    serializer_class = OrderSerializer
+
+
+class UserOrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.prefetch_related('items__product')
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Dynamically filtering the query
+        return super().get_queryset().filter(user=self.request.user)
+
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     qs = super.get_queryset()
+    #     return qs.filter(user=user)
 
 
 @api_view(['GET'])
