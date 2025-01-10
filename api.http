@@ -22,3 +22,11 @@ Content-Type: application/json
     "username": "NT",
     "password": "admin"
 }
+
+###
+POST http://localhost:8000/api/token/refresh/ HTTP/1.1
+Content-Type: application/json
+#Will renew the old token and returns new access token
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczNjU3Nzc1MCwiaWF0IjoxNzM2NDkxMzUwLCJqdGkiOiI5NDhlNGZkNDA5N2Q0MWZhOGQ2ODhlODIyYjI0ZmJhOCIsInVzZXJfaWQiOjJ9.R6U7IfrWt5M77dNJYbeTRMiZexFtJ3lo9sto-kWzcbM"
+}
