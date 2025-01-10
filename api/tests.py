@@ -31,5 +31,4 @@ class UserOrderTestCase(TestCase):
         response is retured then there might be some different error '''
 
         response = self.client.get(reverse('user-orders'))
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

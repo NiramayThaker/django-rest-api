@@ -4,10 +4,21 @@ GET http://127.0.0.1:8000/products/ HTTP/1.1
 
 POST http://127.0.0.1:8000/products/ HTTP/1.1
 Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NDg1NDUwLCJpYXQiOjE3MzY0ODUxNTAsImp0aSI6IjkxMWE0ZGI5MDkyMjQ5OTdhMWIyNmQzYjhjZjNjN2U3IiwidXNlcl9pZCI6MX0.aoIQYGP41T6p2owvme_6zUDYfsSmuIqx1YLXN3h1E0Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NDg5Nzg1LCJpYXQiOjE3MzY0ODk0ODUsImp0aSI6IjM5ZGIxOTJiY2I1MDQxNWQ4ZTU5MTkzZjQ2NmYzNzE0IiwidXNlcl9pZCI6Mn0.TzaHucU21iePe_y1J_BjjTyRltqtqgLUsXAmMWQtcEw
 
 {
     "name": "Television",
     "price": 300.00,
     "stock": 14,
     "description": "An amazing new TV"
+}
+
+###
+POST http://localhost:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "NT",
+    "password": "admin"
 }
