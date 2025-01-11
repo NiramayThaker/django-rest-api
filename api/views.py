@@ -6,9 +6,10 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.views import APIView
 
-from .filters import ProductFilter
+from .filters import ProductFilter, InStockFilterBackend
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+
 # from django.http import JsonResponse, HttpResponse
 # from django.shortcuts import get_object_or_404
 # from rest_framework.decorators import api_view
@@ -21,9 +22,10 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     # Have to specify which filters are being used in backend
     filterset_class = ProductFilter
     filter_backends = [
+        InStockFilterBackend,
         DjangoFilterBackend,
         filters.SearchFilter,
-        filters.OrderingFilter
+        filters.OrderingFilter,
     ]
     # Name must be exact match when used '=' before it
     search_fields = ['=name', 'description']
