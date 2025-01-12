@@ -35,13 +35,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
     "description": "An amazing new TV"
 }
 
+
+###
+GET http://localhost:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NjY3ODYzLCJpYXQiOjE3MzY2Njc1NjMsImp0aSI6IjQxOTY2OWIyZmE4YzQ5ZmM4YjUxNDY0Mzc3Mjc1ZmM0IiwidXNlcl9pZCI6Mn0.Y0nhKjNAdHmCUAZp7q2985sWC8HMzVT5K3Ib4aQG0a8
+
+
 ###
 POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "test"
+    "username": "NT",
+    "password": "admin"
 }
 
 ###
