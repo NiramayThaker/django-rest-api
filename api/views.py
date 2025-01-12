@@ -12,6 +12,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
+from rest_framework import viewsets
+
 # from django.http import JsonResponse, HttpResponse
 # from django.shortcuts import get_object_or_404
 # from rest_framework.decorators import api_view
@@ -65,24 +67,31 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return super().get_permissions()
 
 
-class OrderListAPIView(generics.ListAPIView):
+# class OrderListAPIView(generics.ListAPIView):
+#     queryset = Order.objects.prefetch_related('items__product')
+#     serializer_class = OrderSerializer
+
+
+# class UserOrderListAPIView(generics.ListAPIView):
+#     queryset = Order.objects.prefetch_related('items__product')
+#     serializer_class = OrderSerializer
+#     permission_classes = [IsAuthenticated]
+
+#     def get_queryset(self):
+#         # Dynamically filtering the query
+#         return super().get_queryset().filter(user=self.request.user)
+
+#     # def get_queryset(self):
+#     #     user = self.request.user
+#     #     qs = super.get_queryset()
+#     #     return qs.filter(user=user)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
-
-
-class UserOrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items__product')
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        # Dynamically filtering the query
-        return super().get_queryset().filter(user=self.request.user)
-
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     qs = super.get_queryset()
-    #     return qs.filter(user=user)
+    permission_classes = [AllowAny]
+    pagination_class = None
 
 
 class ProductInfoAPIView(APIView):
