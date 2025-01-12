@@ -10,6 +10,8 @@ from .filters import ProductFilter, InStockFilterBackend
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+
 # from django.http import JsonResponse, HttpResponse
 # from django.shortcuts import get_object_or_404
 # from rest_framework.decorators import api_view
@@ -30,6 +32,15 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     # Name must be exact match when used '=' before it
     search_fields = ['=name', 'description']
     ordering_fields = ['name', 'price', 'stock']
+
+    # Adding pagination to specific class not to every data begin loaded
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 2
+    pagination_class.page_query_param = 'pagenum'
+    pagination_class.page_size_query_param = 'size'
+    pagination_class.max_page_size = 6
+
+
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
