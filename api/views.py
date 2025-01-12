@@ -1,18 +1,16 @@
-from django.db.models import Max  
-from api.serializers import *
-from api.models import *
-from rest_framework.response import Response
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
-from rest_framework.views import APIView
-
-from .filters import ProductFilter, InStockFilterBackend
-from rest_framework import filters
+from django.db.models import Max
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, generics, viewsets
+from rest_framework.pagination import (LimitOffsetPagination, PageNumberPagination)
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.decorators import action
 
-from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+from api.models import *
+from api.serializers import *
 
-from rest_framework import viewsets
+from .filters import InStockFilterBackend, OrderFilter, ProductFilter
 
 # from django.http import JsonResponse, HttpResponse
 # from django.shortcuts import get_object_or_404
@@ -92,6 +90,20 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [AllowAny]
     pagination_class = None
+    filterset_class = OrderFilter
+    filter_backends = [DjangoFilterBackend]
+    permission_classes = [IsAuthenticated]
+
+    # Adding custom login using action
+    @action(
+        detail=False,
+        methods=['get'], 
+        url_path='user-orders',
+    )
+    def user_orders(self, request):
+        orders = self.get_queryset().filter(user=request.user)
+        serializer = self.get_serializer(orders, many=True)
+        return Response(serializer.data)
 
 
 class ProductInfoAPIView(APIView):
