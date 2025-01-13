@@ -61,3 +61,23 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/api/schema/redoc/ HTTP/1.1
+
+
+###
+POST http://127.0.0.1:8000/orders/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NzM4NjM4LCJpYXQiOjE3MzY3MzgzMzgsImp0aSI6IjdmOGYwNTBiZDVhOTQ2MzliM2YzMGZiOTQ0Y2Q0YzhkIiwidXNlcl9pZCI6Mn0.tD6D20DC5GEiEK_buDIGkCuGZOPRLN1v2GoMhneu_5E
+
+{
+    "status": "Pending",
+    "items": [
+        {
+            "product": 2,
+            "quantity": 2
+        },
+        {
+            "product": 3,
+            "quantity": 1
+        }
+    ]
+}
