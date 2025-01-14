@@ -2,6 +2,17 @@ from rest_framework import serializers
 from .models import * 
 from django.db import transaction
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User 
+        fields = (
+            'username',
+            'email',
+            'is_staff',
+        )
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -57,7 +68,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
 
         with transaction.atomic():
             instance = super().update(instance, validated_data)
-            
+
             if orderitem_data is not None:
                 # Clear existing items and add new one
                 instance.items.all().delete()
@@ -70,10 +81,13 @@ class OrderCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         orderitem_data = validated_data.pop('items')
-        order = Order.objects.create(**validated_data)
+        
+        # Context manager
+        with transaction.atomic():
+            order = Order.objects.create(**validated_data)
 
-        for item in orderitem_data:
-            OrderItem.objects.create(order=order, **item)
+            for item in orderitem_data:
+                OrderItem.objects.create(order=order, **item)
         
         return order 
 

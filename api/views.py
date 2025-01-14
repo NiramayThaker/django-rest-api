@@ -17,6 +17,12 @@ from .filters import InStockFilterBackend, OrderFilter, ProductFilter
 # from rest_framework.decorators import api_view
 
 
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = None
+
+
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
