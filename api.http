@@ -38,7 +38,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 
 ###
 GET http://localhost:8000/orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NjY3ODYzLCJpYXQiOjE3MzY2Njc1NjMsImp0aSI6IjQxOTY2OWIyZmE4YzQ5ZmM4YjUxNDY0Mzc3Mjc1ZmM0IiwidXNlcl9pZCI6Mn0.Y0nhKjNAdHmCUAZp7q2985sWC8HMzVT5K3Ib4aQG0a8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NzQwMzYxLCJpYXQiOjE3MzY3NDAwNjEsImp0aSI6ImJjOTk2ZDcxNjRmNzQxNWNiMDEyZThkNGI0MTVkYWVjIiwidXNlcl9pZCI6Mn0.rqDLd2qJeYUPOQNVQyPe2orvJtFxw51sVjOLxEl8_Zs
 
 
 ###
@@ -64,20 +64,20 @@ GET http://localhost:8000/api/schema/redoc/ HTTP/1.1
 
 
 ###
-POST http://127.0.0.1:8000/orders/ HTTP/1.1
+GET http://127.0.0.1:8000/orders/7d52b724-48aa-4451-8eb2-3e712aa80774 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NzM4NjM4LCJpYXQiOjE3MzY3MzgzMzgsImp0aSI6IjdmOGYwNTBiZDVhOTQ2MzliM2YzMGZiOTQ0Y2Q0YzhkIiwidXNlcl9pZCI6Mn0.tD6D20DC5GEiEK_buDIGkCuGZOPRLN1v2GoMhneu_5E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NzQwMzYxLCJpYXQiOjE3MzY3NDAwNjEsImp0aSI6ImJjOTk2ZDcxNjRmNzQxNWNiMDEyZThkNGI0MTVkYWVjIiwidXNlcl9pZCI6Mn0.rqDLd2qJeYUPOQNVQyPe2orvJtFxw51sVjOLxEl8_Zs
 
 {
     "status": "Pending",
     "items": [
         {
             "product": 2,
-            "quantity": 2
+            "quantity": 1
         },
         {
             "product": 3,
-            "quantity": 1
+            "quantity": 3
         }
     ]
 }
