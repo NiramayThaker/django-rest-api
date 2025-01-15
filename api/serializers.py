@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'is_staff',
         )
-
+ 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
